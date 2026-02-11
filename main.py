@@ -112,11 +112,45 @@ with st.expander("Server Laws ⚖️ (from law.md)", expanded=False):
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+import re
+
+# Helper to convert stored messages to API-friendly messages (supports embedded data URIs)
+def _convert_messages_for_api(messages):
+    api_msgs = []
+    for m in messages:
+        content = m.get("content", "")
+        # If message contains a data URI embedded in markdown image, convert to structured content
+        if isinstance(content, str) and "data:" in content and content.strip().startswith("!["):
+            match = re.search(r"!\[([^\]]*)\]\((data:[^)]+)\)", content)
+            if match:
+                alt_text = match.group(1) or ""
+                data_uri = match.group(2)
+                api_msgs.append({"role": m.get("role", "user"), "content": [
+                    {"type": "text", "text": alt_text or "Image attached"},
+                    {"type": "image_url", "image_url": {"url": data_uri}},
+                ]})
+                continue
+        # Fallback: send as plain text
+        api_msgs.append({"role": m.get("role", "user"), "content": content})
+    return api_msgs
+
 # Render chat messages inside a styled container
 for message in st.session_state.messages:
     with st.container():
         with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+            # If this message has stored image data, render the image instead of raw markdown
+            if message.get("image_data"):
+                try:
+                    decoded = base64.b64decode(message["image_data"])
+                    st.image(decoded, caption=message.get("image_name", ""), use_column_width=True)
+                    # Also show accompanying text if present
+                    if message.get("text"):
+                        st.markdown(message["text"])
+                except Exception:
+                    # Fallback to original content
+                    st.markdown(message.get("content", ""))
+            else:
+                st.markdown(message.get("content", ""))
 
 # Image uploader (optional)
 uploaded_image = st.file_uploader("Upload an image (optional) — PNG/JPG/GIF", type=["png","jpg","jpeg","gif"], key="uploaded_image")
@@ -128,7 +162,15 @@ if uploaded_image:
         bytes_data = img.getvalue()
         b64 = base64.b64encode(bytes_data).decode()
         image_markdown = f"![{img.name}](data:{img.type};base64,{b64})"
-        st.session_state.messages.append({"role":"user","content": image_markdown})
+        # Store image with metadata so we can re-render it across reruns
+        st.session_state.messages.append({
+            "role": "user",
+            "content": image_markdown,
+            "image_data": b64,
+            "image_type": img.type,
+            "image_name": img.name,
+            "text": "",
+        })
         with st.chat_message("user"):
             st.image(bytes_data)
 
@@ -136,10 +178,7 @@ if uploaded_image:
             # Build messages with the system prompt loaded from `law.md` (if present)
             messages_for_api = [
                 {"role": "system", "content": st.session_state["system_prompt"]},
-                *[
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ],
+                *(_convert_messages_for_api(st.session_state.messages)),
             ]
             try:
                 stream = client.chat.completions.create(
@@ -168,9 +207,17 @@ if prompt := st.chat_input("Ask me anything — press Enter to send..."):
         b64 = base64.b64encode(bytes_data).decode()
         image_markdown = f"![{img.name}](data:{img.type};base64,{b64})"
         content = content + "\n\n" + image_markdown
-        # The uploader widget retains its selected file until the user clears it; we do not attempt to reset it programmatically.
-
-    st.session_state.messages.append({"role":"user","content": content})
+        # Store message with image metadata so we can render the image later
+        st.session_state.messages.append({
+            "role": "user",
+            "content": content,
+            "image_data": b64,
+            "image_type": img.type,
+            "image_name": img.name,
+            "text": prompt,
+        })
+    else:
+        st.session_state.messages.append({"role":"user","content": content})
     with st.chat_message("user"):
         st.markdown(prompt)
         if "data:" in content:

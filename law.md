@@ -1,16 +1,12 @@
 # Minecraft Server Laws
 
-These are the official server laws. They are used as the assistant's system prompt so the assistant enforces and references them when answering moderation and policy questions.
+Except for the following laws all other laws shall be English laws moved as closely into minecraft as reasonable.
 
-1. Respect all players. Harassment, hate speech, and personal attacks are forbidden.
-2. No cheating, griefing, or exploiting bugs. Abusive use of clients or mods to gain unfair advantage is banned.
-3. Keep chat SFW. No explicit sexual content, graphic violence, or content targeted at minors.
-4. Don't advertise or solicit third-party services without permission.
-5. Follow staff decisions. If you believe a decision was unfair, appeal politely in appeals channel.
-6. No doxxing or sharing private personal information.
-7. Use channels as intended (trade in trade channels, support in support channels, etc.).
-8. Abide by local laws; if uncertain, staff will advise.
+All sentences lengths shall be resoanbaly converted into days with a year equalling 2-3 days. All fines shall be in diamonds of a reasonable value. 
 
-Notes:
-- Staff may impose temporary or permanent bans for severe violations.
-- This document is subject to change; the latest version in `law.md` is authoritative for the assistant.
+**General**
+
+1) Any person who greifs (without a due reason) shall be liable for a sentence of not more than a lifetime banishment with a review no less than every 4 weeks.
+    a) A lifetime ban should not be imposed unless: that person had already greifed; the person abused trust or postion; the greifing is of such a level that no other punishment would achieve the same effect
+2) Any person who hacks shall be liable for a sentence of not more than a lifetime banishment with a review no less than every 4 weeks.
+    a) a life time ban should be imposed only where 
