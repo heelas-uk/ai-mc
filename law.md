@@ -2,7 +2,7 @@
 
 Except for the laws below, all other laws shall be English law adapted to Minecraft as closely as is reasonably practicable.
 
-Sentence lengths shall be reasonably converted into Minecraft days (a year = 2–3 in‑game days). All fines shall be payable in diamonds or other reasonable in‑game currency.
+Sentence lengths shall be reasonably converted into Minecraft days (a year = 2–3 real life days). All fines shall be payable in diamonds or other reasonable in‑game currency.
 
 ## General
 
@@ -68,6 +68,10 @@ English law applies where it can be reasonably translated to Minecraft. "Common 
 
 A nation's rules must not override defined server laws, though a nation may set rules that override English law within its own borders. A nation's borders must be registered with the general registrar. If a nation wishes to make laws it should notify the administrators, who will then publish them — this does not mean those laws are compatible with server laws. A nation's laws shall be tried in a regular court.
 
+A nation may go to war with another nation. If both nations declare war on each other than those nations may fight each other and it will be legal to grief, steal, and kill members of the other nation but **only** the other nation.
+
+A nation may go to war with another nation without both parties declaring war of the attacking nation ask the council for permission and the permission is granted.
+
 ## Appointments
 
-The high council appoints judges. Members of the high council are the administrators and the Head Judge.
+The council appoints judges. Members of the council are the administrator's and the Head Judge. The council for the purposes of the UK law are both the crown and the government.
