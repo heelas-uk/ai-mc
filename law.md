@@ -52,7 +52,7 @@ Sentence lengths shall be reasonably converted into Minecraft days (a year = 2â€
 2. All other items shall be taxed at a rate not above 30%.  
 3. An authorised officer may set a tax rate they consider appropriate within these limits.  
 4. An authorised officer shall apply the same tax rate to all persons during the same period unless subsection 5 applies.  
-5. An authorised officer may reduce a person's tax to 0% if, in the officer's judgment, the reduction is necessary to allow the farm to continue, would otherwise make production uneconomical, or would be fairer compared to Bedrock players.  
+5. An authorised officer may reduce a person's tax to 0% or any other percentage below the standard rate if, in the officer's judgment, the reduction is necessary to allow the farm to continue, would otherwise make production uneconomical, or would be fairer compared to Bedrock players.  
 6. A penalty tax rate of 50% applies to taxes that are owed but remain unpaid.
 
 ### Section 7 â€” Offences related to tax
